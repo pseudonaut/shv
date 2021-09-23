@@ -11,7 +11,7 @@ import numpy as np
 
 data = read_csv('BTCHourlyData_condensed.csv', parse_dates = ['timestamp'], usecols = ['timestamp', 'c', 'h', 'l']).fillna(method='ffill')
 
-timerange = 48
+timerange = 66
 
 sma_25 = talib.SMA(data['c'], timeperiod=24)
 sma_42 = talib.SMA(data['c'], timeperiod=42)
@@ -29,15 +29,15 @@ ema_36 = (ema_36 - data['c']) / data['c']
 ema_95 = (ema_95 - data['c']) / data['c']
 ema_184 = (ema_184 - data['c']) / data['c']
 
-macd = talib.MACD(data['c'], signalperiod=48)[0]
-mom = talib.MOM(data['c'], timeperiod=48)
+macd = talib.MACD(data['c'], signalperiod=24)[0]
+mom = talib.MOM(data['c'], timeperiod=24)
 
 macd = (macd - data['c']) / data['c']
 mom = (mom - data['c']) / data['c']
 
-rsi = talib.RSI(data['c'], timeperiod=48)
+rsi = talib.RSI(data['c'], timeperiod=24)
 aroon = talib.AROONOSC(data['h'], data['l'], timeperiod=50)
-fastk, fastd = talib.STOCHRSI(data['c'], timeperiod=50, fastk_period=5, fastd_period=3, fastd_matype=0)
+fastk, fastd = talib.STOCHRSI(data['c'], timeperiod=24, fastk_period=5, fastd_period=3, fastd_matype=0)
 y = data['c'][timerange:]
 
 
